@@ -53,6 +53,18 @@ namespace System
         }
     }
 
+    extension Type
+    {
+        public bool HasInterface(Type interfaceType)
+        {
+            for (var iType in Interfaces)
+                if (iType.TypeId == interfaceType.TypeId)
+                    return true;
+
+            return false;
+        }
+    }
+
     namespace IO
     {
         extension FileFindEntry
@@ -132,6 +144,20 @@ namespace System
             	Seek(Position + (i64)paddingSize, .Absolute);
 
             	return paddingSize;
+            }
+        }
+    }
+
+    namespace Collections
+    {
+        extension List<T>
+        {
+            public void ShallowClone(List<T> newList)
+            {
+                for (ref T item in ref this)
+                {
+                    newList.Add(item);
+                }
             }
         }
     }
