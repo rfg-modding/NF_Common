@@ -1,3 +1,4 @@
+using System;
 
 static
 {
@@ -18,5 +19,13 @@ static
     {
         monitor.Enter();
         defer:: monitor.Exit();
+    }
+
+    public static mixin DeleteIfSet(Object target)
+    {
+        if (target != null)
+        {
+            delete target;
+        }
     }
 }
