@@ -47,6 +47,11 @@ namespace Common.Math
 				this /= Length;
 		}
 
+        public T Dot(Vec3<T> b)
+        {
+            return (x * b.x) + (y * b.y) + (z * b.z);
+        }
+
 		public Vec3<T> Cross(Vec3<T> b)
 		{
 			return .(
@@ -56,15 +61,21 @@ namespace Common.Math
 					);
 		}
 
+        [Commutable]
 		public static Vec3<T> operator*(Vec3<T> a, T scalar)
 		{
 			return .(a.x * scalar, a.y * scalar, a.z * scalar);
 		}
-
+        
 		public static Vec3<T> operator/(Vec3<T> a, T scalar)
 		{
 			return .(a.x / scalar, a.y / scalar, a.z / scalar);
 		}
+
+        public static Vec3<T> operator*(Vec3<T> a, Vec3<T> b)
+        {
+        	return .(a.x * b.x, a.y * b.y, a.z * b.z);
+        }
 
 		public void operator+=(Vec3<T> rhs) mut
 		{

@@ -26,6 +26,7 @@ namespace Common.Math
 
 		public T Length => Math.Sqrt(x*x + y*y + z*z + w*w);
 		public static Vec4<T> Zero => .(0.0f, 0.0f, 0.0f, 0.0f);
+        public Vec3<T> xyz => .(x, y, z);
 
 		public T Distance(Vec4<T> b)
 		{
@@ -50,6 +51,12 @@ namespace Common.Math
 				this /= Length;
 		}
 
+        public T Dot(Vec4<T> b)
+        {
+            return (x * b.x) + (y * b.y) + (z * b.z) + (w * b.w);
+        }
+
+        [Commutable]
 		public static Vec4<T> operator*(Vec4<T> a, T scalar)
 		{
 			return .(a.x * scalar, a.y * scalar, a.z * scalar, a.w * scalar);
@@ -59,6 +66,11 @@ namespace Common.Math
 		{
 			return .(a.x / scalar, a.y / scalar, a.z / scalar, a.w / scalar);
 		}
+
+        public static Vec4<T> operator*(Vec4<T> a, Vec4<T> b)
+        {
+        	return .(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w);
+        }
 
 		public void operator+=(Vec4<T> rhs) mut
 		{
