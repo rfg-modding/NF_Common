@@ -1,4 +1,5 @@
 using Common;
+using System.Collections;
 
 namespace System
 {
@@ -79,6 +80,28 @@ namespace System
 
         extension Stream
         {
+            //Read a list of strings separated by null terminators with limited size
+            public void ReadSizedStringList(int64 sizeBytes, List<String> strings)
+            {
+                if (sizeBytes <= 0)
+                    return;
+
+                let startPos = Position;
+                while (Position - startPos < sizeBytes)
+                {
+                    strings.Add(ReadStrC(.. new String()));
+
+                    //Skip extra null terminators that are sometimes present in these lists in RFG formats
+                    while (Position - startPos < sizeBytes)
+                    {
+                        if (Peek<char8>() == '\0')
+                            Skip(1);
+                        else
+                            break;
+                    }
+                }
+            }
+
             public Result<void> ReadFixedLengthString(u64 size, String output)
             {
             	for (u64 i = 0; i < size; i++)
