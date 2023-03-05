@@ -64,6 +64,11 @@ namespace Common.Math
             return result;
         }
 
+        public static Mat4 Translation(Vec3<f32> offset)
+        {
+            return Mat4.Translation(offset.x, offset.y, offset.z);
+        }
+
         public static Mat4 Translation(f32 offsetX, f32 offsetY, f32 offsetZ)
         {
             Mat4 result = .Identity;
@@ -88,6 +93,12 @@ namespace Common.Math
             result.Vectors[3].w = 1.0f;
 
             return result;
+        }
+
+        
+        public static Mat4 Scale(Vec3<f32> scale)
+        {
+            return Mat4.Scale(scale.x, scale.y, scale.z);
         }
         
         public static Mat4 Scale(f32 scaleX, f32 scaleY, f32 scaleZ)
