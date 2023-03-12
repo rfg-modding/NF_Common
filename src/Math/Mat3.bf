@@ -16,5 +16,14 @@ namespace Common.Math
             Vectors[1] = uvec;
             Vectors[2] = fvec;
         }
+
+        public Vec3<f32> RotatePoint(Vec3<f32> pos)
+        {
+            Vec3<f32> posFinal = pos;
+            posFinal.x = (Vectors[0].x * pos.x) + (Vectors[1].x * pos.y) + (Vectors[2].x * pos.z);
+            posFinal.y = (Vectors[0].y * pos.x) + (Vectors[1].y * pos.y) + (Vectors[2].y * pos.z);
+            posFinal.z = (Vectors[0].z * pos.x) + (Vectors[1].z * pos.y) + (Vectors[2].z * pos.z);
+            return posFinal;
+        }
 	}
 }
