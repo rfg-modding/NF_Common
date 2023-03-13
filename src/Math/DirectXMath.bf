@@ -60,27 +60,27 @@ namespace Common.Math
             *pCos = sign * p;
         }
 
-        public static Vec4<f32> XMVectorSplatX(Vec4<f32> v)
+        public static Vec4 XMVectorSplatX(Vec4 v)
         {
             return .(v.x, v.x, v.x, v.x);
         }
 
-        public static Vec4<f32> XMVectorSplatY(Vec4<f32> v)
+        public static Vec4 XMVectorSplatY(Vec4 v)
         {
             return .(v.y, v.y, v.y, v.y);
         }
 
-        public static Vec4<f32> XMVectorSplatZ(Vec4<f32> v)
+        public static Vec4 XMVectorSplatZ(Vec4 v)
         {
             return .(v.z, v.z, v.z, v.z);
         }
 
-        public static Vec4<f32> XMVectorSplatW(Vec4<f32> v)
+        public static Vec4 XMVectorSplatW(Vec4 v)
         {
             return .(v.w, v.w, v.w, v.w);
         }
 
-        public static Vec4<f32> XMVectorSelect(Vec4<f32> v1, Vec4<f32> v2, Vec4<f32> control)
+        public static Vec4 XMVectorSelect(Vec4 v1, Vec4 v2, Vec4 control)
         {
             u32 x, y, z, w;
             x = ((u32)v1.x & ~(u32)control.x) | ((u32)v2.x & (u32)control.x);
@@ -91,9 +91,9 @@ namespace Common.Math
             return .Zero;
         }
 
-        public static Vec3<f32> Transform(Vec3<f32> v, Mat4 transform)
+        public static Vec3 Transform(Vec3 v, Mat4 transform)
         {
-            Vec4<f32> result = transform.Vectors[3] + (v.x * transform.Vectors[0]) + (v.y * transform.Vectors[1]) + (v.z * transform.Vectors[2]);
+            Vec4 result = transform.Vectors[3] + (v.x * transform.Vectors[0]) + (v.y * transform.Vectors[1]) + (v.z * transform.Vectors[2]);
             result /= result.w;
             return result.xyz;
         }

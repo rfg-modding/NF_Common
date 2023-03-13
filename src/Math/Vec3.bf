@@ -3,29 +3,28 @@ using System;
 namespace Common.Math
 {
 	[Ordered]
-	public struct Vec3<T> where T : operator T + T, operator T - T, operator T * T, operator T / T, operator implicit f32
-						  where f32 : operator implicit T
+	public struct Vec3
 	{
-		public T x;
-		public T y;
-		public T z;
+		public f32 x;
+		public f32 y;
+		public f32 z;
 
 		public this()
 		{
 			this = default;
 		}
 
-		public this(T x, T y, T z)
+		public this(f32 x, f32 y, f32 z)
 		{
 			this.x = x;
 			this.y = y;
 			this.z = z;
 		}
 
-		public T Length => Math.Sqrt(x*x + y*y + z*z);
-		public static Vec3<T> Zero => .(0.0f, 0.0f, 0.0f);
+		public f32 Length => Math.Sqrt(x*x + y*y + z*z);
+		public static Vec3 Zero => .(0.0f, 0.0f, 0.0f);
 
-		public T Distance(Vec3<T> b)
+		public f32 Distance(Vec3 b)
 		{
 			float x = b.x - this.x;
 			float y = b.y - this.y;
@@ -33,10 +32,10 @@ namespace Common.Math
 			return Math.Sqrt(x*x + y*y + z*z);
 		}
 
-		public Vec3<T> Normalized()
+		public Vec3 Normalized()
 		{
 			if (Length == 0.0f)
-				return Vec3<T>(this.x, this.y, this.z);
+				return Vec3(this.x, this.y, this.z);
 			else
 				return this / Length;
 		}
@@ -47,12 +46,12 @@ namespace Common.Math
 				this /= Length;
 		}
 
-        public T Dot(Vec3<T> b)
+        public f32 Dot(Vec3 b)
         {
             return (x * b.x) + (y * b.y) + (z * b.z);
         }
 
-		public Vec3<T> Cross(Vec3<T> b)
+		public Vec3 Cross(Vec3 b)
 		{
 			return .(
 					 (y * b.z) - (z * b.y),
@@ -62,62 +61,62 @@ namespace Common.Math
 		}
 
         [Commutable]
-		public static Vec3<T> operator*(Vec3<T> a, T scalar)
+		public static Vec3 operator*(Vec3 a, f32 scalar)
 		{
 			return .(a.x * scalar, a.y * scalar, a.z * scalar);
 		}
         
-		public static Vec3<T> operator/(Vec3<T> a, T scalar)
+		public static Vec3 operator/(Vec3 a, f32 scalar)
 		{
 			return .(a.x / scalar, a.y / scalar, a.z / scalar);
 		}
 
-        public static Vec3<T> operator*(Vec3<T> a, Vec3<T> b)
+        public static Vec3 operator*(Vec3 a, Vec3 b)
         {
         	return .(a.x * b.x, a.y * b.y, a.z * b.z);
         }
 
-		public void operator+=(Vec3<T> rhs) mut
+		public void operator+=(Vec3 rhs) mut
 		{
 			x += rhs.x;
 			y += rhs.y;
 			z += rhs.z;
 		}
 
-		public void operator-=(Vec3<T> rhs) mut
+		public void operator-=(Vec3 rhs) mut
 		{
 			x -= rhs.x;
 			y -= rhs.y;
 			z -= rhs.z;
 		}
 
-		public void operator*=(Vec3<T> rhs) mut
+		public void operator*=(Vec3 rhs) mut
 		{
 			x *= rhs.x;
 			y *= rhs.y;
 			z *= rhs.z;
 		}
 
-		public void operator/=(Vec3<T> rhs) mut
+		public void operator/=(Vec3 rhs) mut
 		{
 			x /= rhs.x;
 			y /= rhs.y;
 			z /= rhs.z;
 		}
 
-		public static Vec3<T> operator+(Vec3<T> lhs, Vec3<T> rhs)
+		public static Vec3 operator+(Vec3 lhs, Vec3 rhs)
 		{
 			return .(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z);
 		}
 
-		public static Vec3<T> operator-(Vec3<T> lhs, Vec3<T> rhs)
+		public static Vec3 operator-(Vec3 lhs, Vec3 rhs)
 		{
 			return .(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z);
 		}
 
 		public override void ToString(String strBuffer)
 		{
-			strBuffer.AppendF("[{}, {}, {}]", x, y, z);
+			strBuffer.AppendF("{{{}, {}, {}}}", x, y, z);
 		}
 	}
 }

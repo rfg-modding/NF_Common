@@ -28,7 +28,7 @@ namespace System
 			return currentVal * (1.0f - interpolant) + (targetVal * interpolant);
 		}
 
-		public static Vec2<f32> Lerp(Vec2<f32> currentVal, Vec2<f32> targetVal, f32 interpolant)
+		public static Vec2 Lerp(Vec2 currentVal, Vec2 targetVal, f32 interpolant)
 		{
 			return currentVal * (1.0f - interpolant) + targetVal * interpolant;
 		}
@@ -44,7 +44,7 @@ namespace System
 			return result;
 		}
 
-		public static Mat4 Translate(Mat4 matrix, Vec3<f32> translation)
+		public static Mat4 Translate(Mat4 matrix, Vec3 translation)
 		{
 			Mat4 result = matrix;
 			result.Vectors[3] = matrix.Vectors[0] * translation.x
@@ -54,7 +54,7 @@ namespace System
 			return result;
 		}
 
-		public static Mat4 Scale(Mat4 matrix, Vec3<f32> scale)
+		public static Mat4 Scale(Mat4 matrix, Vec3 scale)
 		{
 			Mat4 result = matrix;
 			result.Vectors[0] = matrix.Vectors[0] * scale.x;
@@ -65,13 +65,13 @@ namespace System
 		}
 
 		//Returns true if the position is within the rectangle
-		public static bool IsPositionInRect(Vec2<f32> pos, Vec2<f32> rectPos, Vec2<f32> rectScale)
+		public static bool IsPositionInRect(Vec2 pos, Vec2 rectPos, Vec2 rectScale)
 		{
 			return pos.x > rectPos.x && pos.x < rectPos.x + rectScale.x && pos.y > rectPos.y && pos.y < rectPos.y + rectScale.y;
 		}
 
 		//Returns true if the two rectangles overlap
-		public static bool DoRectsOverlap(Vec2<f32> rectPos0, Vec2<f32> rectSize0, Vec2<f32> rectPos1, Vec2<f32> rectSize1)
+		public static bool DoRectsOverlap(Vec2 rectPos0, Vec2 rectSize0, Vec2 rectPos1, Vec2 rectSize1)
 		{
 			return rectPos0.x <= rectPos1.x + rectSize1.x &&
 				   rectPos0.y <= rectPos1.y + rectSize1.y &&

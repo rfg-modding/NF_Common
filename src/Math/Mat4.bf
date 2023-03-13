@@ -10,7 +10,7 @@ namespace Common.Math
 	public struct Mat4
 	{
 		public float[16] Array;
-		public Vec4<f32>[4] Vectors;
+		public Vec4[4] Vectors;
 
         public static Mat4 Identity = .();
 
@@ -64,7 +64,7 @@ namespace Common.Math
             return result;
         }
 
-        public static Mat4 Translation(Vec3<f32> offset)
+        public static Mat4 Translation(Vec3 offset)
         {
             return Mat4.Translation(offset.x, offset.y, offset.z);
         }
@@ -96,7 +96,7 @@ namespace Common.Math
         }
 
         
-        public static Mat4 Scale(Vec3<f32> scale)
+        public static Mat4 Scale(Vec3 scale)
         {
             return Mat4.Scale(scale.x, scale.y, scale.z);
         }
@@ -188,11 +188,11 @@ namespace Common.Math
             return m;
         }
 
-        public static Mat4 LookAtLH(Vec3<f32> eyePos, Vec3<f32> focusPos, Vec3<f32> up)
+        public static Mat4 LookAtLH(Vec3 eyePos, Vec3 focusPos, Vec3 up)
         {
-            Vec3<f32> zAxis = (focusPos - eyePos).Normalized();
-            Vec3<f32> xAxis = up.Cross(zAxis).Normalized();
-            Vec3<f32> yAxis = zAxis.Cross(xAxis);
+            Vec3 zAxis = (focusPos - eyePos).Normalized();
+            Vec3 xAxis = up.Cross(zAxis).Normalized();
+            Vec3 yAxis = zAxis.Cross(xAxis);
 
             Mat4 m = .Identity;
             m.Vectors[0] = .(xAxis.x, yAxis.x, zAxis.x, 0.0f);
@@ -204,15 +204,15 @@ namespace Common.Math
 
 		public static Mat4 operator*(Mat4 lhs, Mat4 rhs)
 		{
-            Vec4<f32> row0L = lhs.Vectors[0];
-            Vec4<f32> row1L = lhs.Vectors[1];
-            Vec4<f32> row2L = lhs.Vectors[2];
-            Vec4<f32> row3L = lhs.Vectors[3];
+            Vec4 row0L = lhs.Vectors[0];
+            Vec4 row1L = lhs.Vectors[1];
+            Vec4 row2L = lhs.Vectors[2];
+            Vec4 row3L = lhs.Vectors[3];
 
-            Vec4<f32> row0R = rhs.Vectors[0];
-            Vec4<f32> row1R = rhs.Vectors[1];
-            Vec4<f32> row2R = rhs.Vectors[2];
-            Vec4<f32> row3R = rhs.Vectors[3];
+            Vec4 row0R = rhs.Vectors[0];
+            Vec4 row1R = rhs.Vectors[1];
+            Vec4 row2R = rhs.Vectors[2];
+            Vec4 row3R = rhs.Vectors[3];
 
             Mat4 result;
             result.Vectors[0].x = row0L.x * row0R.x + row0L.y * row1R.x + row0L.z * row2R.x + row0L.w * row3R.x;
