@@ -41,6 +41,17 @@ namespace System
         }
     }
 
+    extension Result<T, TErr>
+    {
+        public T GetValueOrDefault(T customDefault)
+        {
+        	if (this case .Ok(var val))
+        		return val;
+
+        	return customDefault;
+        }
+    }
+
     extension Span<T>
     {
         public static Span<T> Empty = .(null, 0);
