@@ -2,7 +2,7 @@ using System;
 
 namespace Common.Math
 {
-	[Ordered][Union]
+	[Ordered, Union, Reflect(.All)]
 	public struct Mat3
 	{
 		public float[9] Array;

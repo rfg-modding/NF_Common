@@ -4,6 +4,7 @@ using Common;
 namespace Common.Math
 {
 	//Rectangle
+    [Ordered, Reflect(.All)]
 	struct Rect
 	{
 		public Vec2 Min;

@@ -2,7 +2,7 @@ using System;
 
 namespace Common.Math
 {
-	[Ordered]
+	[Ordered, Reflect(.All)]
 	public struct Vec4
 	{
 		public f32 x;

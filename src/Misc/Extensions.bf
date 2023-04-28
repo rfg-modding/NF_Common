@@ -67,11 +67,16 @@ namespace System
 
     extension Type
     {
-        public bool HasInterface(Type interfaceType)
+        public bool HasBaseType(Type baseType)
         {
-            for (var iType in Interfaces)
-                if (iType.TypeId == interfaceType.TypeId)
+            Type curType = this;
+            while (curType != null)
+            {
+                if (curType.TypeId == baseType.TypeId)
                     return true;
+
+                curType = curType.BaseType;
+            }
 
             return false;
         }

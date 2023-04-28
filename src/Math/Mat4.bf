@@ -6,7 +6,7 @@ namespace Common.Math
 	//The main diffence is that this code doesn't use any SSE intrinsics directly. They aren't fully implemented in beef at the time of writing
     //Some helper functions can be found in the DirectXMath static class.
     //DirectXMath is MIT licensed. The license can be viewed here: https://github.com/microsoft/DirectXMath/blob/bec07458c994bd7553638e4d499e17cfedd07831/LICENSE
-	[Ordered][Union]
+	[Ordered, Union, Reflect(.All)]
 	public struct Mat4
 	{
 		public float[16] Array;

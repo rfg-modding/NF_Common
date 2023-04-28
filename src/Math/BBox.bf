@@ -3,7 +3,7 @@ using System;
 
 namespace Common.Math
 {
-    [CRepr] //Marked with this so it's compatible with bounding boxes embedded in RFG file formats
+    [CRepr, Reflect(.All)] //Marked with this so it's compatible with bounding boxes embedded in RFG file formats
 	public struct BoundingBox
 	{
         public Vec3 Min = .Zero;
