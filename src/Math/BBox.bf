@@ -20,5 +20,10 @@ namespace Common.Math
             Vec3 bboxSize = Max - Min;
             return Min + (bboxSize / 2.0f);
         }
+
+        public static BoundingBox operator+(BoundingBox bbox, Vec3 delta)
+        {
+            return .(bbox.Min + delta, bbox.Max + delta);
+        }
 	}
 }
