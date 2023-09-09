@@ -84,6 +84,18 @@ namespace System
 
     namespace IO
     {
+        extension File
+        {
+            public static int GetFileSize(StringView filePath)
+            {
+                FileStream stream = new .()..Open(filePath, .Read, .Read);
+                int fileSize = stream.Length;
+                stream.Close();
+                delete stream;
+                return fileSize;
+            }
+        }
+
         extension FileFindEntry
         {
             public void GetExtension(String outExt)
