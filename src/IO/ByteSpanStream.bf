@@ -100,5 +100,21 @@ namespace Common.IO
     	{
     		return .Ok;
     	}
+
+        //Get view of a string starting at the current position and ending with a null terminator
+        public StringView ReadNullTerminatedStringView()
+        {
+            char8* start = (char8*)CurrentData;
+            int length = 0;
+            repeat
+            {
+                Skip(1);
+                length++;
+            }
+            while (Peek<char8>() != '\0');
+            Skip(1); //Skip null terminator
+
+            return StringView(start, length);
+        }
     }
 }
