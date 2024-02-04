@@ -55,6 +55,13 @@ namespace System
     extension Span<T>
     {
         public static Span<T> Empty = .(null, 0);
+
+        public T[] CreateArrayCopy()
+        {
+            T[] array = new T[this.Length];
+            CopyTo(array);
+            return array;
+        }
     }
 
     extension Array1<T>
