@@ -87,6 +87,20 @@ namespace System
 
             return false;
         }
+
+        public bool ImplementsInterface<T>() where T : interface
+        {
+            Type interfaceType = typeof(T);
+            for (var implementedInterface in this.Interfaces)
+            {
+                if (implementedInterface == interfaceType)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 
     namespace IO
