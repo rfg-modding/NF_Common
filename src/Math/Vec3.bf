@@ -60,6 +60,15 @@ namespace Common.Math
 					);
 		}
 
+        //Returns the vector projection of this onto b
+        public Vec3 Projection(Vec3 u)
+        {
+            Vec3 v = this;
+            f32 uMagnitude = u.Length;
+            f32 uMagnitudeSquared = uMagnitude * uMagnitude;
+            return ((v * u) / uMagnitudeSquared) * u;
+        }
+
         [Commutable]
 		public static Vec3 operator*(Vec3 a, f32 scalar)
 		{
