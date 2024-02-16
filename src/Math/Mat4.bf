@@ -64,6 +64,83 @@ namespace Common.Math
             return result;
         }
 
+        public static Mat4 Inverse(Mat4 input)
+        {
+            f32 determinant = Mat4.Determinant(input);
+            Mat4 adjugate = Mat4.Adjugate(input);
+            Mat4 inverse = adjugate / determinant;
+            return inverse;
+        }
+
+        public static f32 Determinant(Mat4 input)
+        {
+            f32 a11 = input.Array[0];
+            f32 a12 = input.Array[1];
+            f32 a13 = input.Array[2];
+            f32 a14 = input.Array[3];
+            f32 a21 = input.Array[4];
+            f32 a22 = input.Array[5];
+            f32 a23 = input.Array[6];
+            f32 a24 = input.Array[7];
+            f32 a31 = input.Array[8];
+            f32 a32 = input.Array[9];
+            f32 a33 = input.Array[10];
+            f32 a34 = input.Array[11];
+            f32 a41 = input.Array[12];
+            f32 a42 = input.Array[13];
+            f32 a43 = input.Array[14];
+            f32 a44 = input.Array[15];
+
+            f32 d0 = a11 * ((a22 * a33 * a44) + (a23 * a34 * a42) + (a24 * a32 * a43) - (a24 * a33 * a42) - (a23 * a32 * a44) - (a22 * a34 * a43));
+            f32 d1 = -a21 * ((a12 * a33 * a44) + (a13 * a34 * a42) + (a14 * a32 * a43) - (a14 * a33 * a42) - (a13 * a32 * a44) - (a12 * a34 * a43));
+            f32 d2 = a31 * ((a12 * a23 * a44) + (a13 * a24 * a42) + (a14 * a22 * a43) - (a14 * a23 * a42) - (a13 * a22 * a44) - (a12 * a24 * a43));
+            f32 d3 = -a41 * ((a12 * a23 * a34) + (a13 * a24 * a32) + (a14 * a22 * a33) - (a14 * a23 * a32) - (a13 * a22 * a34) - (a12 * a24 * a33));
+            return d0 + d1 + d2 + d3;
+        }
+
+        public static Mat4 Adjugate(Mat4 input)
+        {
+            f32 a11 = input.Array[0];
+            f32 a12 = input.Array[1];
+            f32 a13 = input.Array[2];
+            f32 a14 = input.Array[3];
+            f32 a21 = input.Array[4];
+            f32 a22 = input.Array[5];
+            f32 a23 = input.Array[6];
+            f32 a24 = input.Array[7];
+            f32 a31 = input.Array[8];
+            f32 a32 = input.Array[9];
+            f32 a33 = input.Array[10];
+            f32 a34 = input.Array[11];
+            f32 a41 = input.Array[12];
+            f32 a42 = input.Array[13];
+            f32 a43 = input.Array[14];
+            f32 a44 = input.Array[15];
+
+            Mat4 result = .Identity;
+            result.Array[0] = (a22 * a33 * a44) + (a23 * a34 * a42) + (a24 * a32 * a43) - (a24 * a33 * a42) - (a23 * a32 * a44) - (a22 * a34 * a43);
+            result.Array[1] = -(a12 * a33 * a44) - (a13 * a34 * a42) - (a14 * a32 * a43) + (a14 * a33 * a42) + (a13 * a32 * a44) + (a12 * a34 * a43);
+            result.Array[2] = (a12 * a23 * a44) + (a13 * a24 * a42) + (a14 * a22 * a43) - (a14 * a23 * a42) - (a13 * a22 * a44) - (a12 * a24 * a43);
+            result.Array[3] = -(a12 * a23 * a34) - (a13 * a24 * a32) - (a14 * a22 * a33) + (a14 * a23 * a32) + (a13 * a22 * a34) + (a12 * a24 * a33);
+
+            result.Array[4] = -(a21 * a33 * a44) - (a23 * a34 * a41) - (a24 * a31 * a43) + (a24 * a33 * a41) + (a23 * a31 * a44) + (a21 * a34 * a43);
+            result.Array[5] = (a11 * a33 * a44) + (a13 * a34 * a41) + (a14 * a31 * a43) - (a14 * a33 * a41) - (a13 * a31 * a44) - (a11 * a34 * a43);
+            result.Array[6] = -(a11 * a23 * a44) - (a13 * a24 * a41) - (a14 * a21 * a43) + (a14 * a23 * a41) + (a13 * a21 * a44) + (a11 * a24 * a43);
+            result.Array[7] = (a11 * a23 * a34) + (a13 * a24 * a31) + (a14 * a21 * a33) - (a14 * a23 * a31) - (a13 * a21 * a34) - (a11 * a24 * a33);
+
+            result.Array[8] = (a21 * a32 * a44) + (a22 * a34 * a41) + (a24 * a31 * a42) - (a24 * a32 * a41) - (a22 * a31 * a44) - (a21 * a34 * a42);
+            result.Array[9] = -(a11 * a32 * a44) - (a12 * a34 * a41) - (a14 * a31 * a42) + (a14 * a32 * a41) + (a12 * a31 * a44) + (a11 * a34 * a42);
+            result.Array[10] = (a11 * a22 * a44) + (a12 * a24 * a41) + (a14 * a21 * a42) - (a14 * a22 * a41) - (a12 * a21 * a44) - (a11 * a24 * a42);
+            result.Array[11] = -(a11 * a22 * a34) - (a12 * a24 * a31) - (a14 * a21 * a32) + (a14 * a22 * a31) + (a12 * a21 * a34) + (a11 * a24 * a32);
+
+            result.Array[12] = -(a21 * a32 * a43) - (a22 * a33 * a41) - (a23 * a31 * a42) + (a23 * a32 * a41) + (a22 * a31 * a43) + (a21 * a33 * a42);
+            result.Array[13] = (a11 * a32 * a43) + (a12 * a33 * a41) + (a13 * a31 * a42) - (a13 * a32 * a41) - (a12 * a31 * a43) - (a11 * a33 * a42);
+            result.Array[14] = -(a11 * a22 * a43) - (a12 * a23 * a41) - (a13 * a21 * a42) + (a13 * a22 * a41) + (a12 * a21 * a43) + (a11 * a23 * a42);
+            result.Array[15] = (a11 * a22 * a33) + (a12 * a23 * a31) + (a13 * a21 * a32) - (a13 * a22 * a31) - (a12 * a21 * a33) - (a11 * a23 * a32);
+
+            return result;
+        }
+
         public static Mat4 Translation(Vec3 offset)
         {
             return Mat4.Translation(offset.x, offset.y, offset.z);
@@ -237,5 +314,28 @@ namespace Common.Math
 
             return result;
 		}
+
+        public static Mat4 operator/(Mat4 lhs, f32 divisor)
+        {
+            Mat4 result = lhs;
+            result.Array[0] /= divisor;
+            result.Array[1] /= divisor;
+            result.Array[2] /= divisor;
+            result.Array[3] /= divisor;
+            result.Array[4] /= divisor;
+            result.Array[5] /= divisor;
+            result.Array[6] /= divisor;
+            result.Array[7] /= divisor;
+            result.Array[8] /= divisor;
+            result.Array[9] /= divisor;
+            result.Array[10] /= divisor;
+            result.Array[11] /= divisor;
+            result.Array[12] /= divisor;
+            result.Array[13] /= divisor;
+            result.Array[14] /= divisor;
+            result.Array[15] /= divisor;
+
+            return result;
+        }
 	}
 }

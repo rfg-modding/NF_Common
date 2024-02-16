@@ -97,5 +97,67 @@ namespace Common.Math
             result /= result.w;
             return result.xyz;
         }
+
+        //Based on XMVector3TransformCoord in DirectXMath
+        public static Vec3 Vec3TransformCoord(Vec3 v, Mat4 m)
+        {
+            Vec4 x = .(v.x, v.x, v.x, v.x);
+            Vec4 y = .(v.y, v.y, v.y, v.y);
+            Vec4 z = .(v.z, v.z, v.z, v.z);
+
+            Vec4 result = Vec4MultiplyAdd(z, m.Vectors[2], m.Vectors[3]);
+            result = Vec4MultiplyAdd(y, m.Vectors[1], result);
+            result = Vec4MultiplyAdd(x, m.Vectors[0], result);
+
+            result /= result.w;
+            return Vec3(result.x, result.y, result.z);
+        }
+
+        //Based on XMVector3TransformNormal in DirectXMath
+        public static Vec3 Vec3TransformNormal(Vec3 v, Mat4 m)
+        {
+            Vec4 x = .(v.x, v.x, v.x, v.x);
+            Vec4 y = .(v.y, v.y, v.y, v.y);
+            Vec4 z = .(v.z, v.z, v.z, v.z);
+
+            Vec4 result = Vec4Multiply(z, m.Vectors[2]);
+            result = Vec4MultiplyAdd(y, m.Vectors[1], result);
+            result = Vec4MultiplyAdd(x, m.Vectors[0], result);
+
+            return Vec3(result.x, result.y, result.z);
+        }
+
+        //Based on XMVectorMultiply in DirectXMath
+        public static Vec4 Vec4Multiply(Vec4 v1, Vec4 v2)
+        {
+            return .(
+                v1.x * v2.x,
+                v1.y * v2.y,
+                v1.z * v2.z,
+                v1.w * v2.w
+            );
+        }
+
+        //Based on XMVectorMultiplyAdd in DirectXMath
+        public static Vec4 Vec4MultiplyAdd(Vec4 v1, Vec4 v2, Vec4 v3)
+        {
+            return .(
+                v1.x * v2.x + v3.x,
+                v1.y * v2.y + v3.y,
+                v1.z * v2.z + v3.z,
+                v1.w * v2.w + v3.w
+            );
+        }
+
+        //Based on XMVectorDivide in DirectXMath
+        public static Vec4 Vec4Divide(Vec4 v1, Vec4 v2)
+        {
+            return .(
+                v1.x / v2.x,
+                v1.y / v2.y,
+                v1.z / v2.z,
+                v1.w / v2.w
+            );
+        }
     }
 }
