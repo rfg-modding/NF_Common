@@ -1,5 +1,7 @@
+using System;
 namespace Common.Math;
 
+[Ordered, Reflect(.All)]
 public struct Ray
 {
     public Vec3 Start;

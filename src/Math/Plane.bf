@@ -1,6 +1,7 @@
 using System;
 namespace Common.Math;
 
+[Ordered, Reflect(.All)]
 public struct Plane
 {
     public Vec3 Position;
